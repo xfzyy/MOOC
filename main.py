@@ -6,7 +6,8 @@ import requests
 
 def userinput():
     ''' 解析用户输入 '''
-    course = re.search(r'(\w+-\d+)', input("在此处输入 URL：")).group(1)
+    # course = re.search(r'(\w+-\d+)', input("在此处输入 URL：")).group(1)
+    course = ''
     course_page_url = 'http://www.icourse163.org/learn/' + course
     course_page = requests.get(course_page_url, headers=HEADER)
     course_id_number = re.search(r'id:(\d+),', course_page.text).group(1)
@@ -107,9 +108,10 @@ RESOURCE = 'http://www.icourse163.org/dwr/call/plaincall/CourseBean.getLessonUni
 FILENAME_SAVE = re.compile(r'[\\/:\*\?"<>\|]')
 
 if __name__ == '__main__':
-    FILES = open('files.txt', 'w', encoding='utf-8')
-    DOWNLOAD = open('down.txt', 'w', encoding='utf-8')
-    TOCFILE = open('tocfile.txt', 'w', encoding='utf-8')
+    FILES = open('Rename.bat', 'w', encoding='utf-8')
+    FILES.writelines('chcp 65001\n')
+    DOWNLOAD = open('Links.txt', 'w', encoding='utf-8')
+    TOCFILE = open('TOC.txt', 'w', encoding='utf-8')
     COURSE_ID = userinput()
     parseinfo(COURSE_ID)
     FILES.close()
